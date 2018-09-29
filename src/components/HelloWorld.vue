@@ -1,10 +1,13 @@
 <template>
   <div class="hello">
 
-    <div v-for="data in datas" :key="data.id">{{data}} <br><br></div>
+    <select v-model="selected">
+      <option v-for="article in datas.articles" :key="article.id">{{article.source.name}}</option>
+    </select>
+    <!-- {{datas.articles}}  -->
 
-    <hr>
-    {{datas.articles}}
+    <div>Selected: {{ selected }}</div>
+
   </div>
 </template>
 
@@ -15,7 +18,8 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      datas: []
+      datas: [],
+      selected: ''
     }
   },
   created () {
