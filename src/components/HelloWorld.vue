@@ -8,22 +8,22 @@
       <option v-for="article in datas.articles" :key="article.id">{{article.source.name}}</option>
     </select>
 
-      <section  class="md-card md-theme-demo-lightr" v-for="article in datas.articles" v-if="article.source.name === selected" :key="article.id">
+    <section v-on:click="showAll()" :id="index" v-bind:class="{active: article.isActive}" class="md-card md-theme-demo-lightr" v-for="(article, index) in datas.articles" v-if="selected === article.source.name" :key="article.id">
+
         <md-card-header >
           <img v-if="article.urlToImage !== null" :src="article.urlToImage" :alt="article.title">
           <div class="md-title">{{article.title}}</div>
         </md-card-header>
-
         <md-card-content>
           {{article.description}}
         </md-card-content>
-
         <md-card-actions>
           <md-button :href="article.url" target="_blank">see more</md-button>
         </md-card-actions>
       </section>
 
-      <section class="md-card md-theme-demo-lightr" v-for="article in datas.articles" v-if="selected === ''" :key="article.id">
+      <section v-on:click="showAll(index)"   :id="index"  v-bind:class="{active: article.isActive}" class="md-card md-theme-demo-lightr" v-for="(article, index) in datas.articles" v-if="selected === ''" :key="article.id">
+
         <md-card-header >
           <img v-if="article.urlToImage !== null" :src="article.urlToImage" :alt="article.title">
           <div class="md-title">{{article.title}}</div>
@@ -46,7 +46,8 @@ export default {
   data () {
     return {
       datas: [],
-      selected: ''
+      selected: '',
+      isActive: false
     }
   },
   created () {
@@ -58,6 +59,17 @@ export default {
       .catch(error => {
         console.log(error.response)
       })
+  },
+  methods: {
+    showAll: function (index) {
+      console.log('active' + index)
+      this.isActive = !this.isActive
+      if ($('section#' + index).hasClass('active' + index)) {
+        $('section#' + index).removeClass('active' + index)
+      } else {
+        $('section#' + index).addClass('active' + index)
+      }
+    }
   }
 }
 </script>
@@ -93,6 +105,10 @@ export default {
         padding-bottom: 10px;
         display: -webkit-inline-box;
       }
+    }
+    &[class*="active"] .md-card-content,
+    &[class*="active"] .md-card-actions{
+      display: block;
     }
     .md-card-content, .md-card-actions{
       display: none;
