@@ -32,7 +32,7 @@
           {{article.description}}
         </md-card-content>
         <md-card-actions>
-          <md-button :href="article.url" target="_blank">see more</md-button>
+          <md-button :href="article.url" target="_blank">read more</md-button>
         </md-card-actions>
       </section>
   </div>
@@ -101,9 +101,9 @@ export default {
         letter-spacing: inherit;
         line-height: initial;
         font-weight: 400;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding: 10px;
         display: -webkit-inline-box;
+        color: #000;
       }
     }
     &[class*="active"] .md-card-content,
