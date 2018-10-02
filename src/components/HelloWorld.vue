@@ -41,6 +41,8 @@
 <script>
 
 import axios from 'axios'
+import $ from 'vue-jquery'
+
 export default {
   name: 'HelloWorld',
   data () {
